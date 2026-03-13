@@ -4,6 +4,7 @@ import os
 
 app = Flask(__name__)
 
+
 def get_db():
     return psycopg2.connect(
         host=os.environ.get("DB_HOST", "db"),
@@ -12,9 +13,11 @@ def get_db():
         password=os.environ.get("DB_PASSWORD", "mypassword")
     )
 
+
 @app.route("/")
 def hello():
     return "<h1>Hello from Flask + Docker!</h1>"
+
 
 @app.route("/db")
 def db_check():
@@ -24,6 +27,7 @@ def db_check():
         return "<h1>Database connection successful!</h1>"
     except Exception as e:
         return f"<h1>Database error: {e}</h1>"
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
